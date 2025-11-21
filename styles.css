@@ -24,6 +24,12 @@ h1 {
     margin-bottom: 20px;
 }
 
+.task-counter {
+    margin-bottom: 15px;
+    color: #666;
+    font-size: 14px;
+}
+
 .input-section {
     display: flex;
     gap: 10px;
