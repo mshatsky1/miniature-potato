@@ -25,9 +25,26 @@ h1 {
 }
 
 .task-counter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 15px;
     color: #666;
     font-size: 14px;
+}
+
+.clear-btn {
+    padding: 6px 12px;
+    background-color: #ff9800;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.clear-btn:hover {
+    background-color: #e68900;
 }
 
 .input-section {
