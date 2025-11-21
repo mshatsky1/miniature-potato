@@ -169,3 +169,17 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
     btn.addEventListener('click', () => setFilter(btn.dataset.filter));
 });
 
+// Keyboard shortcuts
+document.addEventListener('keydown', (e) => {
+    // Focus input on '/' key
+    if (e.key === '/' && e.target !== taskInput) {
+        e.preventDefault();
+        taskInput.focus();
+    }
+    // Clear completed on Ctrl+Shift+C
+    if (e.ctrlKey && e.shiftKey && e.key === 'C') {
+        e.preventDefault();
+        clearCompletedTasks();
+    }
+});
+
