@@ -60,6 +60,18 @@ function clearCompletedTasks() {
     renderTasks();
 }
 
+function editTask(id) {
+    const task = tasks.find(t => t.id === id);
+    if (!task) return;
+    
+    const newText = prompt('Edit task:', task.text);
+    if (newText !== null && newText.trim() !== '') {
+        task.text = newText.trim();
+        saveTasks();
+        renderTasks();
+    }
+}
+
 function toggleTask(id) {
     const task = tasks.find(t => t.id === id);
     if (task) {
@@ -96,6 +108,18 @@ function renderTasks() {
             li.style.opacity = '0.6';
         }
         
+        const taskText = document.createElement('span');
+        taskText.textContent = task.text;
+        taskText.style.flex = '1';
+        
+        const editBtn = document.createElement('button');
+        editBtn.textContent = 'Edit';
+        editBtn.className = 'edit-btn';
+        editBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            editTask(task.id);
+        });
+        
         const deleteBtn = document.createElement('button');
         deleteBtn.textContent = 'Delete';
         deleteBtn.className = 'delete-btn';
@@ -105,6 +129,8 @@ function renderTasks() {
         });
         
         li.addEventListener('click', () => toggleTask(task.id));
+        li.appendChild(taskText);
+        li.appendChild(editBtn);
         li.appendChild(deleteBtn);
         taskList.appendChild(li);
     });
