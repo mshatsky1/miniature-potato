@@ -8,13 +8,22 @@ const emptyState = document.getElementById('emptyState');
 let tasks = [];
 
 function saveTasks() {
-    localStorage.setItem('tasks', JSON.stringify(tasks));
+    try {
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+    } catch (e) {
+        console.error('Failed to save tasks to localStorage:', e);
+    }
 }
 
 function loadTasks() {
-    const savedTasks = localStorage.getItem('tasks');
-    if (savedTasks) {
-        tasks = JSON.parse(savedTasks);
+    try {
+        const savedTasks = localStorage.getItem('tasks');
+        if (savedTasks) {
+            tasks = JSON.parse(savedTasks);
+        }
+    } catch (e) {
+        console.error('Failed to load tasks from localStorage:', e);
+        tasks = [];
     }
 }
 
