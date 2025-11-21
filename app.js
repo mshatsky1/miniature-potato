@@ -30,6 +30,8 @@ function loadTasks() {
 function addTask() {
     const taskText = taskInput.value.trim();
     if (taskText === '') {
+        taskInput.classList.add('error');
+        setTimeout(() => taskInput.classList.remove('error'), 500);
         return;
     }
     
