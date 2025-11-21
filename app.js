@@ -2,6 +2,7 @@ const taskInput = document.getElementById('taskInput');
 const addButton = document.getElementById('addButton');
 const taskList = document.getElementById('taskList');
 const taskCount = document.getElementById('taskCount');
+const clearCompleted = document.getElementById('clearCompleted');
 
 let tasks = [];
 
@@ -36,6 +37,12 @@ function addTask() {
 
 function deleteTask(id) {
     tasks = tasks.filter(t => t.id !== id);
+    saveTasks();
+    renderTasks();
+}
+
+function clearCompletedTasks() {
+    tasks = tasks.filter(t => !t.completed);
     saveTasks();
     renderTasks();
 }
@@ -83,6 +90,7 @@ loadTasks();
 renderTasks();
 
 addButton.addEventListener('click', addTask);
+clearCompleted.addEventListener('click', clearCompletedTasks);
 taskInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
         addTask();
