@@ -109,3 +109,10 @@ h1 {
     background-color: #da190b;
 }
 
+.empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: #999;
+    font-style: italic;
+}
+
