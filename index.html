@@ -17,6 +17,11 @@
             <input type="text" id="taskInput" placeholder="Add a new task...">
             <button id="addButton">Add Task</button>
         </div>
+        <div class="filter-section">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="active">Active</button>
+            <button class="filter-btn" data-filter="completed">Completed</button>
+        </div>
         <ul id="taskList"></ul>
         <div id="emptyState" class="empty-state" style="display: none;">
             <p>No tasks yet. Add one above to get started!</p>
