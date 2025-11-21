@@ -6,6 +6,7 @@ const clearCompleted = document.getElementById('clearCompleted');
 const emptyState = document.getElementById('emptyState');
 
 let tasks = [];
+let currentFilter = 'all';
 
 function saveTasks() {
     try {
@@ -73,9 +74,21 @@ function updateTaskCount() {
     taskCount.textContent = `${remaining} task${remaining !== 1 ? 's' : ''} remaining`;
 }
 
+function getFilteredTasks() {
+    switch (currentFilter) {
+        case 'active':
+            return tasks.filter(t => !t.completed);
+        case 'completed':
+            return tasks.filter(t => t.completed);
+        default:
+            return tasks;
+    }
+}
+
 function renderTasks() {
     taskList.innerHTML = '';
-    tasks.forEach(task => {
+    const filteredTasks = getFilteredTasks();
+    filteredTasks.forEach(task => {
         const li = document.createElement('li');
         li.textContent = task.text;
         if (task.completed) {
@@ -97,11 +110,22 @@ function renderTasks() {
     });
     updateTaskCount();
     
-    if (tasks.length === 0) {
+    if (filteredTasks.length === 0) {
         emptyState.style.display = 'block';
     } else {
         emptyState.style.display = 'none';
     }
+}
+
+function setFilter(filter) {
+    currentFilter = filter;
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.dataset.filter === filter) {
+            btn.classList.add('active');
+        }
+    });
+    renderTasks();
 }
 
 loadTasks();
@@ -113,5 +137,9 @@ taskInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
         addTask();
     }
+});
+
+document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => setFilter(btn.dataset.filter));
 });
 
