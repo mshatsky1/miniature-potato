@@ -55,9 +55,16 @@ function deleteTask(id) {
 }
 
 function clearCompletedTasks() {
-    tasks = tasks.filter(t => !t.completed);
-    saveTasks();
-    renderTasks();
+    const completedCount = tasks.filter(t => t.completed).length;
+    if (completedCount === 0) {
+        return;
+    }
+    
+    if (confirm(`Are you sure you want to delete ${completedCount} completed task${completedCount !== 1 ? 's' : ''}?`)) {
+        tasks = tasks.filter(t => !t.completed);
+        saveTasks();
+        renderTasks();
+    }
 }
 
 function editTask(id) {
