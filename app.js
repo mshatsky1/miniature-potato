@@ -4,6 +4,17 @@ const taskList = document.getElementById('taskList');
 
 let tasks = [];
 
+function saveTasks() {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+}
+
+function loadTasks() {
+    const savedTasks = localStorage.getItem('tasks');
+    if (savedTasks) {
+        tasks = JSON.parse(savedTasks);
+    }
+}
+
 function addTask() {
     const taskText = taskInput.value.trim();
     if (taskText === '') {
@@ -18,11 +29,13 @@ function addTask() {
     
     tasks.push(task);
     taskInput.value = '';
+    saveTasks();
     renderTasks();
 }
 
 function deleteTask(id) {
     tasks = tasks.filter(t => t.id !== id);
+    saveTasks();
     renderTasks();
 }
 
@@ -30,6 +43,7 @@ function toggleTask(id) {
     const task = tasks.find(t => t.id === id);
     if (task) {
         task.completed = !task.completed;
+        saveTasks();
         renderTasks();
     }
 }
@@ -57,6 +71,9 @@ function renderTasks() {
         taskList.appendChild(li);
     });
 }
+
+loadTasks();
+renderTasks();
 
 addButton.addEventListener('click', addTask);
 taskInput.addEventListener('keypress', (e) => {
