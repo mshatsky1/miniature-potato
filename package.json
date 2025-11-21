@@ -1,0 +1,20 @@
+{
+  "name": "miniature-potato",
+  "version": "0.1.0",
+  "description": "A simple task management application",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "keywords": [
+    "tasks",
+    "todo",
+    "productivity"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {}
+}
+
