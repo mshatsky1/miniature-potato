@@ -1,6 +1,7 @@
 const taskInput = document.getElementById('taskInput');
 const addButton = document.getElementById('addButton');
 const taskList = document.getElementById('taskList');
+const taskCount = document.getElementById('taskCount');
 
 let tasks = [];
 
@@ -48,6 +49,11 @@ function toggleTask(id) {
     }
 }
 
+function updateTaskCount() {
+    const remaining = tasks.filter(t => !t.completed).length;
+    taskCount.textContent = `${remaining} task${remaining !== 1 ? 's' : ''} remaining`;
+}
+
 function renderTasks() {
     taskList.innerHTML = '';
     tasks.forEach(task => {
@@ -70,6 +76,7 @@ function renderTasks() {
         li.appendChild(deleteBtn);
         taskList.appendChild(li);
     });
+    updateTaskCount();
 }
 
 loadTasks();
