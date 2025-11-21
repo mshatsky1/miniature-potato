@@ -3,6 +3,7 @@ const addButton = document.getElementById('addButton');
 const taskList = document.getElementById('taskList');
 const taskCount = document.getElementById('taskCount');
 const clearCompleted = document.getElementById('clearCompleted');
+const emptyState = document.getElementById('emptyState');
 
 let tasks = [];
 
@@ -84,6 +85,12 @@ function renderTasks() {
         taskList.appendChild(li);
     });
     updateTaskCount();
+    
+    if (tasks.length === 0) {
+        emptyState.style.display = 'block';
+    } else {
+        emptyState.style.display = 'none';
+    }
 }
 
 loadTasks();
