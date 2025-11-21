@@ -21,11 +21,24 @@ function addTask() {
     renderTasks();
 }
 
+function toggleTask(id) {
+    const task = tasks.find(t => t.id === id);
+    if (task) {
+        task.completed = !task.completed;
+        renderTasks();
+    }
+}
+
 function renderTasks() {
     taskList.innerHTML = '';
     tasks.forEach(task => {
         const li = document.createElement('li');
         li.textContent = task.text;
+        if (task.completed) {
+            li.style.textDecoration = 'line-through';
+            li.style.opacity = '0.6';
+        }
+        li.addEventListener('click', () => toggleTask(task.id));
         taskList.appendChild(li);
     });
 }
