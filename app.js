@@ -12,6 +12,7 @@ const taskList = document.getElementById('taskList');
 const taskCount = document.getElementById('taskCount');
 const clearCompleted = document.getElementById('clearCompleted');
 const emptyState = document.getElementById('emptyState');
+const emptyStateMessage = document.getElementById('emptyStateMessage');
 
 // Application state
 let tasks = []; // Array to store all tasks
@@ -302,8 +303,18 @@ function renderTasks() {
     
     updateTaskCount();
     
-    if (emptyState) {
+    if (emptyState && emptyStateMessage) {
         if (filteredTasks.length === 0) {
+            // Contextual empty state messages based on filter
+            if (tasks.length === 0) {
+                emptyStateMessage.textContent = 'No tasks yet. Add one above to get started!';
+            } else if (currentFilter === FILTER_ACTIVE) {
+                emptyStateMessage.textContent = 'No active tasks. All tasks are completed!';
+            } else if (currentFilter === FILTER_COMPLETED) {
+                emptyStateMessage.textContent = 'No completed tasks yet.';
+            } else {
+                emptyStateMessage.textContent = 'No tasks found.';
+            }
             emptyState.style.display = 'block';
         } else {
             emptyState.style.display = 'none';
