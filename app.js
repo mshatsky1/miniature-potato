@@ -43,6 +43,17 @@ function pluralize(count, singular, plural = null) {
 }
 
 /**
+ * Sanitizes user input to prevent XSS attacks
+ * @param {string} input - The input string to sanitize
+ * @returns {string} Sanitized string
+ */
+function sanitizeInput(input) {
+    const div = document.createElement('div');
+    div.textContent = input;
+    return div.textContent || div.innerText || '';
+}
+
+/**
  * Saves tasks to localStorage
  * @returns {boolean} True if save was successful, false otherwise
  */
@@ -109,12 +120,15 @@ function addTask() {
         return;
     }
     
-    const taskText = taskInput.value.trim();
+    let taskText = taskInput.value.trim();
     if (taskText === '') {
         taskInput.classList.add('error');
         setTimeout(() => taskInput.classList.remove('error'), 500);
         return;
     }
+    
+    // Sanitize input to prevent XSS
+    taskText = sanitizeInput(taskText);
     
     // Validate task text length
     if (taskText.length > MAX_TASK_LENGTH) {
@@ -174,7 +188,8 @@ function editTask(id) {
     
     const newText = prompt('Edit task:', task.text);
     if (newText !== null && newText.trim() !== '') {
-        task.text = newText.trim();
+        // Sanitize input to prevent XSS
+        task.text = sanitizeInput(newText.trim());
         saveTasks();
         renderTasks();
     }
