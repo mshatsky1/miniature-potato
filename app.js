@@ -18,6 +18,31 @@ let tasks = []; // Array to store all tasks
 let currentFilter = FILTER_ALL; // Current filter state
 
 /**
+ * Utility function to safely get element by ID
+ * @param {string} id - Element ID
+ * @returns {HTMLElement|null} The element or null if not found
+ */
+function getElementById(id) {
+    const element = document.getElementById(id);
+    if (!element) {
+        console.warn(`Element with ID "${id}" not found`);
+    }
+    return element;
+}
+
+/**
+ * Utility function to pluralize text
+ * @param {number} count - The count
+ * @param {string} singular - Singular form
+ * @param {string} plural - Plural form (optional)
+ * @returns {string} Pluralized text
+ */
+function pluralize(count, singular, plural = null) {
+    if (count === 1) return singular;
+    return plural || singular + 's';
+}
+
+/**
  * Saves tasks to localStorage
  * @returns {void}
  */
@@ -109,7 +134,7 @@ function clearCompletedTasks() {
         return;
     }
     
-    if (confirm(`Are you sure you want to delete ${completedCount} completed task${completedCount !== 1 ? 's' : ''}?`)) {
+    if (confirm(`Are you sure you want to delete ${completedCount} completed ${pluralize(completedCount, 'task')}?`)) {
         tasks = tasks.filter(t => !t.completed);
         saveTasks();
         renderTasks();
@@ -159,7 +184,9 @@ function toggleTask(id) {
  */
 function updateTaskCount() {
     const remaining = tasks.filter(t => !t.completed).length;
-    taskCount.textContent = `${remaining} task${remaining !== 1 ? 's' : ''} remaining`;
+    if (taskCount) {
+        taskCount.textContent = `${remaining} ${pluralize(remaining, 'task')} remaining`;
+    }
 }
 
 /**
