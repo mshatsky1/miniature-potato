@@ -266,6 +266,7 @@ function renderTasks() {
         const li = document.createElement('li');
         li.textContent = task.text;
         if (task.completed) {
+            li.classList.add('completed');
             li.style.textDecoration = 'line-through';
             li.style.opacity = '0.6';
         }

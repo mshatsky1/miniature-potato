@@ -151,6 +151,33 @@ h1 {
     animation-fill-mode: forwards;
 }
 
+#taskList li.completed {
+    position: relative;
+}
+
+#taskList li.completed::before {
+    content: '✓';
+    position: absolute;
+    left: -20px;
+    color: #4CAF50;
+    font-weight: bold;
+    animation: checkmark 0.3s ease;
+}
+
+@keyframes checkmark {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
 @keyframes slideIn {
     from {
         opacity: 0;
