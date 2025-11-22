@@ -8,6 +8,10 @@ const emptyState = document.getElementById('emptyState');
 let tasks = [];
 let currentFilter = 'all';
 
+/**
+ * Saves tasks to localStorage
+ * @returns {void}
+ */
 function saveTasks() {
     try {
         localStorage.setItem('tasks', JSON.stringify(tasks));
@@ -16,6 +20,10 @@ function saveTasks() {
     }
 }
 
+/**
+ * Loads tasks from localStorage
+ * @returns {void}
+ */
 function loadTasks() {
     try {
         const savedTasks = localStorage.getItem('tasks');
@@ -28,6 +36,10 @@ function loadTasks() {
     }
 }
 
+/**
+ * Adds a new task to the list
+ * @returns {void}
+ */
 function addTask() {
     const taskText = taskInput.value.trim();
     if (taskText === '') {
@@ -48,12 +60,21 @@ function addTask() {
     renderTasks();
 }
 
+/**
+ * Deletes a task by ID
+ * @param {number} id - The task ID to delete
+ * @returns {void}
+ */
 function deleteTask(id) {
     tasks = tasks.filter(t => t.id !== id);
     saveTasks();
     renderTasks();
 }
 
+/**
+ * Clears all completed tasks after user confirmation
+ * @returns {void}
+ */
 function clearCompletedTasks() {
     const completedCount = tasks.filter(t => t.completed).length;
     if (completedCount === 0) {
@@ -67,6 +88,11 @@ function clearCompletedTasks() {
     }
 }
 
+/**
+ * Edits an existing task
+ * @param {number} id - The task ID to edit
+ * @returns {void}
+ */
 function editTask(id) {
     const task = tasks.find(t => t.id === id);
     if (!task) return;
@@ -79,6 +105,11 @@ function editTask(id) {
     }
 }
 
+/**
+ * Toggles the completion status of a task
+ * @param {number} id - The task ID to toggle
+ * @returns {void}
+ */
 function toggleTask(id) {
     const task = tasks.find(t => t.id === id);
     if (task) {
@@ -88,11 +119,19 @@ function toggleTask(id) {
     }
 }
 
+/**
+ * Updates the task count display
+ * @returns {void}
+ */
 function updateTaskCount() {
     const remaining = tasks.filter(t => !t.completed).length;
     taskCount.textContent = `${remaining} task${remaining !== 1 ? 's' : ''} remaining`;
 }
 
+/**
+ * Gets tasks filtered by current filter setting
+ * @returns {Array} Filtered array of tasks
+ */
 function getFilteredTasks() {
     switch (currentFilter) {
         case 'active':
@@ -104,6 +143,10 @@ function getFilteredTasks() {
     }
 }
 
+/**
+ * Renders all tasks to the DOM
+ * @returns {void}
+ */
 function renderTasks() {
     taskList.innerHTML = '';
     const filteredTasks = getFilteredTasks();
@@ -150,6 +193,11 @@ function renderTasks() {
     }
 }
 
+/**
+ * Sets the current filter and updates the display
+ * @param {string} filter - The filter type ('all', 'active', 'completed')
+ * @returns {void}
+ */
 function setFilter(filter) {
     currentFilter = filter;
     document.querySelectorAll('.filter-btn').forEach(btn => {
