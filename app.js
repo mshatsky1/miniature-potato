@@ -308,7 +308,6 @@ function renderTasks() {
     
     filteredTasks.forEach(task => {
         const li = document.createElement('li');
-        li.textContent = task.text;
         if (task.completed) {
             li.classList.add('completed');
             li.style.textDecoration = 'line-through';
@@ -397,19 +396,30 @@ loadTasks();
 renderTasks();
 
 // Event listeners setup
-addButton.addEventListener('click', addTask);
-clearCompleted.addEventListener('click', clearCompletedTasks);
+if (addButton) {
+    addButton.addEventListener('click', addTask);
+}
+if (clearCompleted) {
+    clearCompleted.addEventListener('click', clearCompletedTasks);
+}
 
 // Allow adding tasks with Enter key
-taskInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-        addTask();
-    }
-});
+if (taskInput) {
+    taskInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            addTask();
+        }
+    });
+}
 
 // Filter button event listeners
 document.querySelectorAll('.filter-btn').forEach(btn => {
-    btn.addEventListener('click', () => setFilter(btn.dataset.filter));
+    btn.addEventListener('click', () => {
+        const filter = btn.dataset.filter;
+        if (filter) {
+            setFilter(filter);
+        }
+    });
 });
 
 // Global keyboard shortcuts
