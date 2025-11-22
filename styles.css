@@ -34,13 +34,14 @@ h1 {
 }
 
 .clear-btn {
-    padding: 6px 12px;
+    padding: 8px 16px;
     background-color: #ff9800;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    font-size: 12px;
+    font-size: 14px;
+    font-weight: 500;
     transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
@@ -74,6 +75,7 @@ h1 {
     border-radius: 4px;
     cursor: pointer;
     font-size: 14px;
+    font-weight: 500;
     transition: all 0.2s;
 }
 
@@ -194,13 +196,14 @@ h1 {
 }
 
 .edit-btn {
-    padding: 6px 12px;
+    padding: 8px 16px;
     background-color: #2196F3;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    font-size: 12px;
+    font-size: 14px;
+    font-weight: 500;
     margin-right: 8px;
     transition: background-color 0.2s ease, transform 0.1s ease;
 }
@@ -215,13 +218,14 @@ h1 {
 }
 
 .delete-btn {
-    padding: 6px 12px;
+    padding: 8px 16px;
     background-color: #f44336;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    font-size: 12px;
+    font-size: 14px;
+    font-weight: 500;
     transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
