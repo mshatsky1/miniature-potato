@@ -275,5 +275,15 @@ document.addEventListener('keydown', (e) => {
         e.preventDefault();
         clearCompletedTasks();
     }
+    // Escape key to clear input
+    if (e.key === 'Escape' && e.target === taskInput) {
+        taskInput.value = '';
+        taskInput.blur();
+    }
+    // Filter shortcuts: 1=All, 2=Active, 3=Completed
+    if (e.key >= '1' && e.key <= '3' && !e.ctrlKey && !e.metaKey && e.target !== taskInput) {
+        const filterMap = { '1': FILTER_ALL, '2': FILTER_ACTIVE, '3': FILTER_COMPLETED };
+        setFilter(filterMap[e.key]);
+    }
 });
 
