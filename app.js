@@ -13,6 +13,7 @@ const taskCount = document.getElementById('taskCount');
 const clearCompleted = document.getElementById('clearCompleted');
 const emptyState = document.getElementById('emptyState');
 const emptyStateMessage = document.getElementById('emptyStateMessage');
+const ariaLive = document.getElementById('ariaLive');
 
 // Application state
 let tasks = []; // Array to store all tasks
@@ -150,6 +151,11 @@ function addTask() {
     taskInput.focus();
     saveTasks();
     renderTasks();
+    // Announce to screen readers
+    if (ariaLive) {
+        ariaLive.textContent = `Task "${taskText}" added`;
+        setTimeout(() => { ariaLive.textContent = ''; }, 1000);
+    }
 }
 
 /**
@@ -158,9 +164,15 @@ function addTask() {
  * @returns {void}
  */
 function deleteTask(id) {
+    const task = tasks.find(t => t.id === id);
     tasks = tasks.filter(t => t.id !== id);
     saveTasks();
     renderTasks();
+    // Announce to screen readers
+    if (ariaLive && task) {
+        ariaLive.textContent = `Task "${task.text}" deleted`;
+        setTimeout(() => { ariaLive.textContent = ''; }, 1000);
+    }
 }
 
 /**
@@ -210,6 +222,7 @@ function editTask(id) {
 function toggleTask(id) {
     const task = tasks.find(t => t.id === id);
     if (task) {
+        const wasCompleted = task.completed;
         task.completed = !task.completed;
         // Add completion timestamp if completing, remove if uncompleting
         if (task.completed && !task.completedAt) {
@@ -219,6 +232,13 @@ function toggleTask(id) {
         }
         saveTasks();
         renderTasks();
+        // Announce to screen readers
+        if (ariaLive) {
+            ariaLive.textContent = wasCompleted 
+                ? `Task "${task.text}" marked as active`
+                : `Task "${task.text}" completed`;
+            setTimeout(() => { ariaLive.textContent = ''; }, 1000);
+        }
     }
 }
 
