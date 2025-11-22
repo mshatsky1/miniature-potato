@@ -13,8 +13,9 @@ const taskCount = document.getElementById('taskCount');
 const clearCompleted = document.getElementById('clearCompleted');
 const emptyState = document.getElementById('emptyState');
 
-let tasks = [];
-let currentFilter = FILTER_ALL;
+// Application state
+let tasks = []; // Array to store all tasks
+let currentFilter = FILTER_ALL; // Current filter state
 
 /**
  * Saves tasks to localStorage
@@ -235,29 +236,34 @@ function setFilter(filter) {
     renderTasks();
 }
 
+// Initialize application
 loadTasks();
 renderTasks();
 
+// Event listeners setup
 addButton.addEventListener('click', addTask);
 clearCompleted.addEventListener('click', clearCompletedTasks);
+
+// Allow adding tasks with Enter key
 taskInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
         addTask();
     }
 });
 
+// Filter button event listeners
 document.querySelectorAll('.filter-btn').forEach(btn => {
     btn.addEventListener('click', () => setFilter(btn.dataset.filter));
 });
 
-// Keyboard shortcuts
+// Global keyboard shortcuts
 document.addEventListener('keydown', (e) => {
-    // Focus input on '/' key
+    // Focus input on '/' key (when not already focused)
     if (e.key === '/' && e.target !== taskInput) {
         e.preventDefault();
         taskInput.focus();
     }
-    // Clear completed on Ctrl+Shift+C
+    // Clear completed tasks with Ctrl+Shift+C
     if (e.ctrlKey && e.shiftKey && e.key === 'C') {
         e.preventDefault();
         clearCompletedTasks();
