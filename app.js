@@ -44,13 +44,26 @@ function pluralize(count, singular, plural = null) {
 
 /**
  * Saves tasks to localStorage
- * @returns {void}
+ * @returns {boolean} True if save was successful, false otherwise
  */
 function saveTasks() {
     try {
+        // Check if localStorage is available
+        if (typeof Storage === 'undefined') {
+            console.warn('localStorage is not available');
+            return false;
+        }
         localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
+        return true;
     } catch (e) {
-        console.error('Failed to save tasks to localStorage:', e);
+        // Handle quota exceeded or other errors
+        if (e.name === 'QuotaExceededError') {
+            console.error('Storage quota exceeded. Cannot save tasks.');
+            alert('Storage quota exceeded. Some tasks may not be saved.');
+        } else {
+            console.error('Failed to save tasks to localStorage:', e);
+        }
+        return false;
     }
 }
 
@@ -60,12 +73,21 @@ function saveTasks() {
  */
 function loadTasks() {
     try {
+        // Check if localStorage is available
+        if (typeof Storage === 'undefined') {
+            console.warn('localStorage is not available');
+            tasks = [];
+            return;
+        }
         const savedTasks = localStorage.getItem(STORAGE_KEY);
         if (savedTasks) {
             const parsedTasks = JSON.parse(savedTasks);
             // Validate that parsed data is an array
             if (Array.isArray(parsedTasks)) {
-                tasks = parsedTasks;
+                // Validate each task has required properties
+                tasks = parsedTasks.filter(task => 
+                    task && typeof task.id !== 'undefined' && typeof task.text === 'string'
+                );
             } else {
                 console.warn('Invalid task data format, resetting to empty array');
                 tasks = [];
