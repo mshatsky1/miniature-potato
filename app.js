@@ -28,7 +28,14 @@ function loadTasks() {
     try {
         const savedTasks = localStorage.getItem('tasks');
         if (savedTasks) {
-            tasks = JSON.parse(savedTasks);
+            const parsedTasks = JSON.parse(savedTasks);
+            // Validate that parsed data is an array
+            if (Array.isArray(parsedTasks)) {
+                tasks = parsedTasks;
+            } else {
+                console.warn('Invalid task data format, resetting to empty array');
+                tasks = [];
+            }
         }
     } catch (e) {
         console.error('Failed to load tasks from localStorage:', e);
@@ -41,10 +48,21 @@ function loadTasks() {
  * @returns {void}
  */
 function addTask() {
+    if (!taskInput) {
+        console.error('Task input element not found');
+        return;
+    }
+    
     const taskText = taskInput.value.trim();
     if (taskText === '') {
         taskInput.classList.add('error');
         setTimeout(() => taskInput.classList.remove('error'), 500);
+        return;
+    }
+    
+    // Validate task text length
+    if (taskText.length > 500) {
+        alert('Task text is too long. Maximum 500 characters allowed.');
         return;
     }
     
