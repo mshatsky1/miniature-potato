@@ -145,6 +145,8 @@ function addTask() {
     
     tasks.push(task);
     taskInput.value = '';
+    // Refocus input for better UX
+    taskInput.focus();
     saveTasks();
     renderTasks();
 }
@@ -174,6 +176,10 @@ function clearCompletedTasks() {
         tasks = tasks.filter(t => !t.completed);
         saveTasks();
         renderTasks();
+        // Return focus to input after clearing
+        if (taskInput) {
+            taskInput.focus();
+        }
     }
 }
 
