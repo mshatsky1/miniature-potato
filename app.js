@@ -78,7 +78,8 @@ function addTask() {
     const task = {
         id: Date.now(),
         text: taskText,
-        completed: false
+        completed: false,
+        createdAt: new Date().toISOString()
     };
     
     tasks.push(task);
@@ -141,6 +142,12 @@ function toggleTask(id) {
     const task = tasks.find(t => t.id === id);
     if (task) {
         task.completed = !task.completed;
+        // Add completion timestamp if completing, remove if uncompleting
+        if (task.completed && !task.completedAt) {
+            task.completedAt = new Date().toISOString();
+        } else if (!task.completed) {
+            delete task.completedAt;
+        }
         saveTasks();
         renderTasks();
     }
