@@ -41,10 +41,16 @@ h1 {
     border-radius: 4px;
     cursor: pointer;
     font-size: 12px;
+    transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
 .clear-btn:hover {
     background-color: #e68900;
+    transform: translateY(-1px);
+}
+
+.clear-btn:active {
+    transform: translateY(0);
 }
 
 .input-section {
@@ -86,7 +92,13 @@ h1 {
     border: 1px solid #ddd;
     border-radius: 4px;
     font-size: 16px;
-    transition: border-color 0.2s;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+#taskInput:focus {
+    outline: none;
+    border-color: #2196F3;
+    box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.2);
 }
 
 #taskInput.error {
@@ -108,10 +120,16 @@ h1 {
     border-radius: 4px;
     cursor: pointer;
     font-size: 16px;
+    transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
 #addButton:hover {
     background-color: #45a049;
+    transform: translateY(-1px);
+}
+
+#addButton:active {
+    transform: translateY(0);
 }
 
 #taskList {
@@ -157,10 +175,16 @@ h1 {
     cursor: pointer;
     font-size: 12px;
     margin-right: 8px;
+    transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
 .edit-btn:hover {
     background-color: #0b7dda;
+    transform: scale(1.05);
+}
+
+.edit-btn:active {
+    transform: scale(1);
 }
 
 .delete-btn {
@@ -171,10 +195,16 @@ h1 {
     border-radius: 4px;
     cursor: pointer;
     font-size: 12px;
+    transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
 .delete-btn:hover {
     background-color: #da190b;
+    transform: scale(1.05);
+}
+
+.delete-btn:active {
+    transform: scale(1);
 }
 
 .empty-state {
