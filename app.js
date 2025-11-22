@@ -246,8 +246,15 @@ function getFilteredTasks() {
  * @returns {void}
  */
 function renderTasks() {
-    taskList.innerHTML = '';
+    if (!taskList) {
+        console.error('Task list element not found');
+        return;
+    }
+    
+    // Use document fragment for better performance
+    const fragment = document.createDocumentFragment();
     const filteredTasks = getFilteredTasks();
+    
     filteredTasks.forEach(task => {
         const li = document.createElement('li');
         li.textContent = task.text;
@@ -280,14 +287,21 @@ function renderTasks() {
         li.appendChild(taskText);
         li.appendChild(editBtn);
         li.appendChild(deleteBtn);
-        taskList.appendChild(li);
+        fragment.appendChild(li);
     });
+    
+    // Clear and append fragment in one operation for better performance
+    taskList.innerHTML = '';
+    taskList.appendChild(fragment);
+    
     updateTaskCount();
     
-    if (filteredTasks.length === 0) {
-        emptyState.style.display = 'block';
-    } else {
-        emptyState.style.display = 'none';
+    if (emptyState) {
+        if (filteredTasks.length === 0) {
+            emptyState.style.display = 'block';
+        } else {
+            emptyState.style.display = 'none';
+        }
     }
 }
 
