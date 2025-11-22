@@ -164,7 +164,15 @@ function addTask() {
  * @returns {void}
  */
 function deleteTask(id) {
+    if (typeof id !== 'number' && typeof id !== 'string') {
+        console.error('Invalid task ID provided to deleteTask');
+        return;
+    }
     const task = tasks.find(t => t.id === id);
+    if (!task) {
+        console.warn(`Task with ID ${id} not found`);
+        return;
+    }
     tasks = tasks.filter(t => t.id !== id);
     saveTasks();
     renderTasks();
@@ -202,13 +210,25 @@ function clearCompletedTasks() {
  * @returns {void}
  */
 function editTask(id) {
+    if (typeof id !== 'number' && typeof id !== 'string') {
+        console.error('Invalid task ID provided to editTask');
+        return;
+    }
     const task = tasks.find(t => t.id === id);
-    if (!task) return;
+    if (!task) {
+        console.warn(`Task with ID ${id} not found`);
+        return;
+    }
     
     const newText = prompt('Edit task:', task.text);
     if (newText !== null && newText.trim() !== '') {
         // Sanitize input to prevent XSS
-        task.text = sanitizeInput(newText.trim());
+        const sanitizedText = sanitizeInput(newText.trim());
+        if (sanitizedText.length > MAX_TASK_LENGTH) {
+            alert(`Task text is too long. Maximum ${MAX_TASK_LENGTH} characters allowed.`);
+            return;
+        }
+        task.text = sanitizedText;
         saveTasks();
         renderTasks();
     }
@@ -220,6 +240,10 @@ function editTask(id) {
  * @returns {void}
  */
 function toggleTask(id) {
+    if (typeof id !== 'number' && typeof id !== 'string') {
+        console.error('Invalid task ID provided to toggleTask');
+        return;
+    }
     const task = tasks.find(t => t.id === id);
     if (task) {
         const wasCompleted = task.completed;
@@ -349,13 +373,22 @@ function renderTasks() {
  * @returns {void}
  */
 function setFilter(filter) {
+    // Validate filter value
+    const validFilters = [FILTER_ALL, FILTER_ACTIVE, FILTER_COMPLETED];
+    if (!validFilters.includes(filter)) {
+        console.warn(`Invalid filter: ${filter}, defaulting to ${FILTER_ALL}`);
+        filter = FILTER_ALL;
+    }
     currentFilter = filter;
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-        btn.classList.remove('active');
-        if (btn.dataset.filter === filter) {
-            btn.classList.add('active');
-        }
-    });
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    if (filterButtons.length > 0) {
+        filterButtons.forEach(btn => {
+            btn.classList.remove('active');
+            if (btn.dataset.filter === filter) {
+                btn.classList.add('active');
+            }
+        });
+    }
     renderTasks();
 }
 
