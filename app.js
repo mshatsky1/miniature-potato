@@ -1,3 +1,11 @@
+// Constants
+const FILTER_ALL = 'all';
+const FILTER_ACTIVE = 'active';
+const FILTER_COMPLETED = 'completed';
+const STORAGE_KEY = 'tasks';
+const MAX_TASK_LENGTH = 500;
+
+// DOM Elements
 const taskInput = document.getElementById('taskInput');
 const addButton = document.getElementById('addButton');
 const taskList = document.getElementById('taskList');
@@ -6,7 +14,7 @@ const clearCompleted = document.getElementById('clearCompleted');
 const emptyState = document.getElementById('emptyState');
 
 let tasks = [];
-let currentFilter = 'all';
+let currentFilter = FILTER_ALL;
 
 /**
  * Saves tasks to localStorage
@@ -14,7 +22,7 @@ let currentFilter = 'all';
  */
 function saveTasks() {
     try {
-        localStorage.setItem('tasks', JSON.stringify(tasks));
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
     } catch (e) {
         console.error('Failed to save tasks to localStorage:', e);
     }
@@ -26,7 +34,7 @@ function saveTasks() {
  */
 function loadTasks() {
     try {
-        const savedTasks = localStorage.getItem('tasks');
+        const savedTasks = localStorage.getItem(STORAGE_KEY);
         if (savedTasks) {
             const parsedTasks = JSON.parse(savedTasks);
             // Validate that parsed data is an array
@@ -61,8 +69,8 @@ function addTask() {
     }
     
     // Validate task text length
-    if (taskText.length > 500) {
-        alert('Task text is too long. Maximum 500 characters allowed.');
+    if (taskText.length > MAX_TASK_LENGTH) {
+        alert(`Task text is too long. Maximum ${MAX_TASK_LENGTH} characters allowed.`);
         return;
     }
     
@@ -152,9 +160,9 @@ function updateTaskCount() {
  */
 function getFilteredTasks() {
     switch (currentFilter) {
-        case 'active':
+        case FILTER_ACTIVE:
             return tasks.filter(t => !t.completed);
-        case 'completed':
+        case FILTER_COMPLETED:
             return tasks.filter(t => t.completed);
         default:
             return tasks;
