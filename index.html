@@ -11,7 +11,7 @@
         <h1>Task Manager</h1>
         <div class="task-counter">
             <span id="taskCount">0 tasks remaining</span>
-            <button id="clearCompleted" class="clear-btn">Clear Completed</button>
+            <button id="clearCompleted" class="clear-btn" aria-label="Clear all completed tasks">Clear Completed</button>
         </div>
         <div class="input-section">
             <input type="text" id="taskInput" placeholder="Add a new task..." aria-label="Task input">
@@ -23,9 +23,10 @@
             <button class="filter-btn" data-filter="completed" aria-label="Show completed tasks">Completed</button>
         </div>
         <ul id="taskList" role="list" aria-label="Task list"></ul>
-        <div id="emptyState" class="empty-state" style="display: none;">
+        <div id="emptyState" class="empty-state" style="display: none;" role="status" aria-live="polite">
             <p>No tasks yet. Add one above to get started!</p>
         </div>
+        <div id="ariaLive" class="sr-only" aria-live="polite" aria-atomic="true"></div>
     </div>
     <script src="app.js"></script>
 </body>
