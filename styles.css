@@ -43,6 +43,7 @@ h1 {
     border-radius: 12px;
     font-weight: 500;
     color: #1976d2;
+    transition: all 0.3s ease;
 }
 
 .clear-btn {
