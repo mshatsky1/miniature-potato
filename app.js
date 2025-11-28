@@ -102,7 +102,7 @@ function loadTasks() {
                     task && typeof task.id !== 'undefined' && typeof task.text === 'string'
                 );
             } else {
-                console.warn('Invalid task data format, resetting to empty array');
+                console.warn('Invalid task data format detected. Expected array but got:', typeof parsedTasks, '. Resetting to empty array.');
                 tasks = [];
             }
         }
