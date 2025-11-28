@@ -231,17 +231,28 @@ function editTask(id) {
     }
     
     const newText = prompt('Edit task:', task.text);
-    if (newText !== null && newText.trim() !== '') {
-        // Sanitize input to prevent XSS
-        const sanitizedText = sanitizeInput(newText.trim());
-        if (sanitizedText.length > MAX_TASK_LENGTH) {
-            alert(`Task text is too long. Maximum ${MAX_TASK_LENGTH} characters allowed.`);
-            return;
-        }
-        task.text = sanitizedText;
-        saveTasks();
-        renderTasks();
+    if (newText === null) {
+        // User cancelled, no action needed
+        return;
     }
+    const trimmedText = newText.trim();
+    if (trimmedText === '') {
+        alert('Task text cannot be empty.');
+        return;
+    }
+    if (trimmedText === task.text) {
+        // No change made, no need to update
+        return;
+    }
+    // Sanitize input to prevent XSS
+    const sanitizedText = sanitizeInput(trimmedText);
+    if (sanitizedText.length > MAX_TASK_LENGTH) {
+        alert(`Task text is too long. Maximum ${MAX_TASK_LENGTH} characters allowed.`);
+        return;
+    }
+    task.text = sanitizedText;
+    saveTasks();
+    renderTasks();
 }
 
 /**
