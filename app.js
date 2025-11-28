@@ -147,6 +147,11 @@ function addTask() {
     
     tasks.push(task);
     taskInput.value = '';
+    // Visual feedback
+    if (addButton) {
+        addButton.classList.add('saving');
+        setTimeout(() => addButton.classList.remove('saving'), 300);
+    }
     // Refocus input for better UX
     taskInput.focus();
     saveTasks();

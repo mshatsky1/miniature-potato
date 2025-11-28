@@ -138,6 +138,11 @@ h1 {
     transform: translateY(0);
 }
 
+#addButton.saving {
+    opacity: 0.7;
+    cursor: wait;
+}
+
 #addButton:focus-visible,
 .clear-btn:focus-visible,
 .filter-btn:focus-visible,
