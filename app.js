@@ -154,7 +154,10 @@ function addTask() {
     }
     // Refocus input for better UX
     taskInput.focus();
-    saveTasks();
+    const saved = saveTasks();
+    if (saved) {
+        console.log('Task added successfully:', task.text);
+    }
     renderTasks();
     // Announce to screen readers
     if (ariaLive) {
