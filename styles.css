@@ -295,6 +295,11 @@ h1 {
 
 /* Mobile touch target improvements */
 @media (max-width: 768px) {
+    .container {
+        padding: 15px;
+        margin: 10px;
+    }
+    
     .edit-btn,
     .delete-btn,
     .clear-btn,
