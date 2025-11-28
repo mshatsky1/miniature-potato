@@ -433,6 +433,12 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
 });
 
 // Global keyboard shortcuts
+// Available shortcuts:
+// - '/' : Focus task input
+// - Enter : Add task (when input is focused)
+// - Escape : Clear input (when input is focused)
+// - Ctrl+Shift+C : Clear all completed tasks
+// - 1, 2, 3 : Switch filters (All, Active, Completed)
 document.addEventListener('keydown', (e) => {
     // Focus input on '/' key (when not already focused)
     if (e.key === '/' && e.target !== taskInput) {
