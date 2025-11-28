@@ -134,6 +134,8 @@ function addTask() {
     
     // Validate task text length
     if (taskText.length > MAX_TASK_LENGTH) {
+        taskInput.classList.add('error');
+        setTimeout(() => taskInput.classList.remove('error'), 2000);
         alert(`Task text is too long. Maximum ${MAX_TASK_LENGTH} characters allowed.`);
         return;
     }
