@@ -262,3 +262,14 @@ h1 {
     border-width: 0;
 }
 
+/* Mobile touch target improvements */
+@media (max-width: 768px) {
+    .edit-btn,
+    .delete-btn,
+    .clear-btn,
+    .filter-btn {
+        min-height: 44px;
+        min-width: 44px;
+    }
+}
+
