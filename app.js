@@ -356,11 +356,11 @@ function renderTasks() {
         if (filteredTasks.length === 0) {
             // Contextual empty state messages based on filter
             if (tasks.length === 0) {
-                emptyStateMessage.textContent = 'No tasks yet. Add one above to get started!';
+                emptyStateMessage.textContent = 'No tasks yet. Add one above to get started! 🎯';
             } else if (currentFilter === FILTER_ACTIVE) {
-                emptyStateMessage.textContent = 'No active tasks. All tasks are completed!';
+                emptyStateMessage.textContent = 'No active tasks. All tasks are completed! 🎉';
             } else if (currentFilter === FILTER_COMPLETED) {
-                emptyStateMessage.textContent = 'No completed tasks yet.';
+                emptyStateMessage.textContent = 'No completed tasks yet. Keep going! 💪';
             } else {
                 emptyStateMessage.textContent = 'No tasks found.';
             }
