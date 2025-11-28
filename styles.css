@@ -37,6 +37,14 @@ h1 {
     font-size: 14px;
 }
 
+#taskCount {
+    padding: 4px 12px;
+    background-color: #e3f2fd;
+    border-radius: 12px;
+    font-weight: 500;
+    color: #1976d2;
+}
+
 .clear-btn {
     padding: 8px 16px;
     background-color: #ff9800;
