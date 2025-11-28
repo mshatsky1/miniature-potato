@@ -138,6 +138,15 @@ h1 {
     transform: translateY(0);
 }
 
+#addButton:focus-visible,
+.clear-btn:focus-visible,
+.filter-btn:focus-visible,
+.edit-btn:focus-visible,
+.delete-btn:focus-visible {
+    outline: 2px solid #2196F3;
+    outline-offset: 2px;
+}
+
 #taskList {
     list-style: none;
 }
