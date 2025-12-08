@@ -459,6 +459,15 @@ function updateCharCounter() {
         if (maxCharCount) {
             maxCharCount.textContent = MAX_TASK_LENGTH;
         }
+        // Add warning class when approaching limit
+        const charCounter = charCount.parentElement;
+        if (charCounter) {
+            if (length > MAX_TASK_LENGTH * 0.9) {
+                charCounter.classList.add('warning');
+            } else {
+                charCounter.classList.remove('warning');
+            }
+        }
     }
 }
 
