@@ -57,6 +57,24 @@ function sanitizeInput(input) {
 }
 
 /**
+ * Checks if localStorage is available and usable
+ * @returns {boolean} True if localStorage is available
+ */
+function isLocalStorageAvailable() {
+    try {
+        if (typeof Storage === 'undefined') {
+            return false;
+        }
+        const test = '__localStorage_test__';
+        localStorage.setItem(test, test);
+        localStorage.removeItem(test);
+        return true;
+    } catch (e) {
+        return false;
+    }
+}
+
+/**
  * Saves tasks to localStorage
  * @returns {boolean} True if save was successful, false otherwise
  */
