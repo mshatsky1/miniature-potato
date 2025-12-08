@@ -4,6 +4,7 @@ const FILTER_ACTIVE = 'active';
 const FILTER_COMPLETED = 'completed';
 const STORAGE_KEY = 'tasks';
 const MAX_TASK_LENGTH = 500;
+const MIN_TASK_LENGTH = 1;
 
 // DOM Elements
 const taskInput = document.getElementById('taskInput');
