@@ -91,10 +91,20 @@ h1 {
     color: #999;
     margin-bottom: 20px;
     margin-right: 4px;
+    transition: color 0.3s ease;
 }
 
 .char-counter span {
     font-weight: 500;
+}
+
+.char-counter.warning {
+    color: #ff9800;
+}
+
+.char-counter.warning #charCount {
+    color: #f44336;
+    font-weight: 700;
 }
 
 .filter-section {
