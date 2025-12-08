@@ -81,7 +81,7 @@ function isLocalStorageAvailable() {
 function saveTasks() {
     try {
         // Check if localStorage is available
-        if (typeof Storage === 'undefined') {
+        if (!isLocalStorageAvailable()) {
             console.warn('localStorage is not available');
             return false;
         }
