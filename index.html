@@ -15,8 +15,11 @@
             <button id="clearCompleted" class="clear-btn" aria-label="Clear all completed tasks">Clear Completed</button>
         </div>
         <div class="input-section">
-            <input type="text" id="taskInput" placeholder="Add a new task (press Enter to add)..." aria-label="Task input">
+            <input type="text" id="taskInput" placeholder="Add a new task (press Enter to add)..." aria-label="Task input" maxlength="500">
             <button id="addButton" aria-label="Add new task">Add Task</button>
+        </div>
+        <div class="char-counter">
+            <span id="charCount">0</span>/<span id="maxCharCount">500</span>
         </div>
         <div class="filter-section" role="group" aria-label="Filter tasks">
             <button class="filter-btn active" data-filter="all" aria-label="Show all tasks">All</button>
