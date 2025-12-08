@@ -441,6 +441,7 @@ function setFilter(filter) {
 // Initialize application
 loadTasks();
 renderTasks();
+updateCharCounter();
 
 // Event listeners setup
 if (addButton) {
