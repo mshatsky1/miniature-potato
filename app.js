@@ -15,6 +15,8 @@ const clearCompleted = document.getElementById('clearCompleted');
 const emptyState = document.getElementById('emptyState');
 const emptyStateMessage = document.getElementById('emptyStateMessage');
 const ariaLive = document.getElementById('ariaLive');
+const charCount = document.getElementById('charCount');
+const maxCharCount = document.getElementById('maxCharCount');
 
 // Application state
 let tasks = []; // Array to store all tasks
@@ -448,8 +450,20 @@ if (clearCompleted) {
     clearCompleted.addEventListener('click', clearCompletedTasks);
 }
 
+// Update character counter
+function updateCharCounter() {
+    if (charCount && taskInput) {
+        const length = taskInput.value.length;
+        charCount.textContent = length;
+        if (maxCharCount) {
+            maxCharCount.textContent = MAX_TASK_LENGTH;
+        }
+    }
+}
+
 // Allow adding tasks with Enter key
 if (taskInput) {
+    taskInput.addEventListener('input', updateCharCounter);
     taskInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
             e.preventDefault();
