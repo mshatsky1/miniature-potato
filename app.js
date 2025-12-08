@@ -312,8 +312,13 @@ function toggleTask(id) {
  */
 function updateTaskCount() {
     const remaining = tasks.filter(t => !t.completed).length;
+    const completed = tasks.filter(t => t.completed).length;
     if (taskCount) {
         taskCount.textContent = `${remaining} ${pluralize(remaining, 'task')} remaining`;
+    }
+    // Disable clear button if no completed tasks
+    if (clearCompleted) {
+        clearCompleted.disabled = completed === 0;
     }
 }
 
