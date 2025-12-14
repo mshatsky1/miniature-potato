@@ -148,6 +148,19 @@ function isValidTask(task) {
 }
 
 /**
+ * Generates a unique task ID
+ * @returns {number} A unique timestamp-based ID
+ */
+function generateTaskId() {
+    let id = Date.now();
+    // Ensure uniqueness by incrementing if ID already exists
+    while (tasks.some(t => t.id === id)) {
+        id++;
+    }
+    return id;
+}
+
+/**
  * Adds a new task to the list
  * @returns {void}
  */
@@ -176,7 +189,7 @@ function addTask() {
     }
     
     const task = {
-        id: Date.now(),
+        id: generateTaskId(),
         text: taskText,
         completed: false,
         createdAt: new Date().toISOString()
