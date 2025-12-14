@@ -204,6 +204,19 @@ function addTask() {
 }
 
 /**
+ * Finds a task by its ID
+ * @param {number|string} id - The task ID to find
+ * @returns {Object|undefined} The task object or undefined if not found
+ */
+function findTaskById(id) {
+    if (typeof id !== 'number' && typeof id !== 'string') {
+        console.error('Invalid task ID provided to findTaskById');
+        return undefined;
+    }
+    return tasks.find(t => t.id === id);
+}
+
+/**
  * Deletes a task by ID
  * @param {number} id - The task ID to delete
  * @returns {void}
@@ -213,7 +226,7 @@ function deleteTask(id) {
         console.error('Invalid task ID provided to deleteTask');
         return;
     }
-    const task = tasks.find(t => t.id === id);
+    const task = findTaskById(id);
     if (!task) {
         console.warn(`Task with ID ${id} not found`);
         return;
