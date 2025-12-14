@@ -357,6 +357,14 @@ function toggleTask(id) {
 }
 
 /**
+ * Checks if the tasks array is empty
+ * @returns {boolean} True if tasks array is empty
+ */
+function hasNoTasks() {
+    return tasks.length === 0;
+}
+
+/**
  * Gets task statistics
  * @returns {Object} Object containing task statistics
  */
