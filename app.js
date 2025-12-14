@@ -303,6 +303,34 @@ function exportTasks() {
 }
 
 /**
+ * Duplicates an existing task
+ * @param {number|string} id - The task ID to duplicate
+ * @returns {void}
+ */
+function duplicateTask(id) {
+    const task = findTaskById(id);
+    if (!task) {
+        console.warn(`Task with ID ${id} not found for duplication`);
+        return;
+    }
+    
+    const duplicatedTask = {
+        id: generateTaskId(),
+        text: task.text,
+        completed: false,
+        createdAt: new Date().toISOString()
+    };
+    
+    tasks.push(duplicatedTask);
+    saveTasks();
+    renderTasks();
+    if (ariaLive) {
+        ariaLive.textContent = `Task "${task.text}" duplicated`;
+        setTimeout(() => { ariaLive.textContent = ''; }, 1000);
+    }
+}
+
+/**
  * Edits an existing task
  * @param {number} id - The task ID to edit
  * @returns {void}
