@@ -274,6 +274,10 @@ h1 {
     transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
+.edit-btn:last-child {
+    margin-right: 0;
+}
+
 .edit-btn:hover {
     background-color: #0b7dda;
     transform: scale(1.05);
