@@ -276,6 +276,25 @@ function clearCompletedTasks() {
 }
 
 /**
+ * Clears all tasks after user confirmation
+ * @returns {void}
+ */
+function clearAllTasks() {
+    if (hasNoTasks()) {
+        return;
+    }
+    
+    if (confirm(`Are you sure you want to delete all ${tasks.length} ${pluralize(tasks.length, 'task')}? This action cannot be undone.`)) {
+        tasks = [];
+        saveTasks();
+        renderTasks();
+        if (taskInput) {
+            taskInput.focus();
+        }
+    }
+}
+
+/**
  * Exports tasks as JSON string
  * @returns {string} JSON string of tasks
  */
