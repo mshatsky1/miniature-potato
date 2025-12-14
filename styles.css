@@ -343,3 +343,19 @@ h1 {
     }
 }
 
+/* Print styles */
+@media print {
+    .input-section,
+    .filter-section,
+    .clear-btn,
+    .edit-btn,
+    .delete-btn {
+        display: none;
+    }
+    
+    .container {
+        box-shadow: none;
+        max-width: 100%;
+    }
+}
+
