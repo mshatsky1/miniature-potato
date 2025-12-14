@@ -236,6 +236,14 @@ function clearCompletedTasks() {
 }
 
 /**
+ * Exports tasks as JSON string
+ * @returns {string} JSON string of tasks
+ */
+function exportTasks() {
+    return JSON.stringify(tasks, null, 2);
+}
+
+/**
  * Edits an existing task
  * @param {number} id - The task ID to edit
  * @returns {void}
