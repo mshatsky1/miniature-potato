@@ -350,6 +350,11 @@ h1 {
         min-height: 44px;
         min-width: 44px;
     }
+    
+    .empty-state {
+        padding: 30px 15px;
+        font-size: 14px;
+    }
 }
 
 /* Larger screen optimizations */
