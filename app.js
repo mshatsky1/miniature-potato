@@ -360,6 +360,15 @@ function updateTaskCount() {
 }
 
 /**
+ * Gets tasks by completion status
+ * @param {boolean} completed - Whether to get completed or active tasks
+ * @returns {Array} Array of tasks matching the completion status
+ */
+function getTasksByStatus(completed) {
+    return tasks.filter(t => t.completed === completed);
+}
+
+/**
  * Gets tasks filtered by current filter setting
  * @returns {Array} Filtered array of tasks
  */
