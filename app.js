@@ -412,6 +412,21 @@ function hasNoTasks() {
 }
 
 /**
+ * Gets the oldest task by creation date
+ * @returns {Object|undefined} The oldest task or undefined if no tasks
+ */
+function getOldestTask() {
+    if (hasNoTasks()) {
+        return undefined;
+    }
+    return tasks.reduce((oldest, current) => {
+        const oldestDate = oldest.createdAt ? new Date(oldest.createdAt) : new Date(0);
+        const currentDate = current.createdAt ? new Date(current.createdAt) : new Date(0);
+        return currentDate < oldestDate ? current : oldest;
+    });
+}
+
+/**
  * Gets task statistics
  * @returns {Object} Object containing task statistics
  */
