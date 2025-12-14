@@ -352,6 +352,14 @@ h1 {
     }
 }
 
+/* Larger screen optimizations */
+@media (min-width: 1200px) {
+    .container {
+        max-width: 800px;
+        padding: 30px;
+    }
+}
+
 /* Print styles */
 @media print {
     .input-section,
