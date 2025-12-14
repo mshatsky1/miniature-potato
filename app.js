@@ -134,6 +134,20 @@ function loadTasks() {
 }
 
 /**
+ * Validates if a task object has the required structure
+ * @param {Object} task - The task object to validate
+ * @returns {boolean} True if task is valid
+ */
+function isValidTask(task) {
+    return task &&
+           typeof task.id !== 'undefined' &&
+           typeof task.text === 'string' &&
+           task.text.trim().length >= MIN_TASK_LENGTH &&
+           task.text.length <= MAX_TASK_LENGTH &&
+           typeof task.completed === 'boolean';
+}
+
+/**
  * Adds a new task to the list
  * @returns {void}
  */
