@@ -309,6 +309,19 @@ function toggleTask(id) {
 }
 
 /**
+ * Gets task statistics
+ * @returns {Object} Object containing task statistics
+ */
+function getTaskStatistics() {
+    return {
+        total: tasks.length,
+        completed: tasks.filter(t => t.completed).length,
+        active: tasks.filter(t => !t.completed).length,
+        completionRate: tasks.length > 0 ? (tasks.filter(t => t.completed).length / tasks.length * 100).toFixed(1) : 0
+    };
+}
+
+/**
  * Updates the task count display
  * @returns {void}
  */
