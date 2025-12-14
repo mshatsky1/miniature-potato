@@ -440,6 +440,18 @@ function getTaskStatistics() {
 }
 
 /**
+ * Sorts tasks by creation date (newest first)
+ * @returns {void}
+ */
+function sortTasksByDate() {
+    tasks.sort((a, b) => {
+        const dateA = a.createdAt ? new Date(a.createdAt) : new Date(0);
+        const dateB = b.createdAt ? new Date(b.createdAt) : new Date(0);
+        return dateB - dateA; // Newest first
+    });
+}
+
+/**
  * Updates the task count display
  * @returns {void}
  */
