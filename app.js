@@ -452,12 +452,21 @@ function sortTasksByDate() {
 }
 
 /**
+ * Gets the count of tasks by completion status
+ * @param {boolean} completed - Whether to count completed or active tasks
+ * @returns {number} Count of tasks
+ */
+function getTaskCountByStatus(completed) {
+    return tasks.filter(t => t.completed === completed).length;
+}
+
+/**
  * Updates the task count display
  * @returns {void}
  */
 function updateTaskCount() {
-    const remaining = tasks.filter(t => !t.completed).length;
-    const completed = tasks.filter(t => t.completed).length;
+    const remaining = getTaskCountByStatus(false);
+    const completed = getTaskCountByStatus(true);
     if (taskCount) {
         taskCount.textContent = `${remaining} ${pluralize(remaining, 'task')} remaining`;
     }
