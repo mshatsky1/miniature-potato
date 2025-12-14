@@ -280,7 +280,7 @@ function editTask(id) {
         console.error('Invalid task ID provided to editTask');
         return;
     }
-    const task = tasks.find(t => t.id === id);
+    const task = findTaskById(id);
     if (!task) {
         console.warn(`Task with ID ${id} not found`);
         return;
@@ -321,7 +321,7 @@ function toggleTask(id) {
         console.error('Invalid task ID provided to toggleTask');
         return;
     }
-    const task = tasks.find(t => t.id === id);
+    const task = findTaskById(id);
     if (task) {
         const wasCompleted = task.completed;
         task.completed = !task.completed;
